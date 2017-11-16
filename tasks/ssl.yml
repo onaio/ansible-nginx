@@ -1,0 +1,31 @@
+# nginx/tasks/ssl.yml
+
+- name: Nginx | Copy secure ssl configuration
+  template:
+    src: secure_ssl.conf.j2
+    dest: "{{ nginx_dir }}/secure_ssl.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+
+- name: Ensure ssl directory is present
+  file:
+    state: directory
+    path: /etc/nginx/ssl
+    owner: root
+    mode: 0700
+
+- name: Copy ssl certs
+  copy:
+    src: "{{ inventory_dir }}/files/{{ item }}"
+    dest: "/etc/nginx/ssl/{{ item }}"
+    mode: 0600
+  with_items:
+    - "{{ ssl_key }}"
+    - "{{ ssl_cert }}"
+
+- name: Generate secure Diffie Hellman ephemeral parameters
+  command: openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
+  when: enable_https == True
