@@ -133,7 +133,12 @@ nginx_sites:
       location2:
         name: /images/
         try_files: "$uri $uri/ /index.html"
+        proxy_set_header:
+         - header1 valA
+         - header2 valB
 ```
+
+The final example shows how to set multiple directives.
 
 To enable or disable specific sites you can add prior used `server_name` attribute to the variables `nginx_enabled_sites` and `nginx_disabled_sites`.
 
