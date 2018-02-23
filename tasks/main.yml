@@ -10,5 +10,3 @@
 - include: sites.yml
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
-- include: ssl.yml
-  when: enable_ssl is defined and enable_ssl == true

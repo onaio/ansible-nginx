@@ -36,3 +36,8 @@
   notify:
     - reload nginx
   when: nginx_disabled_sites|lower != 'none'
+
+- include_tasks: ssl.yml
+  vars:
+    site: "{{ item }}"
+  with_items: "{{ nginx_sites }}"

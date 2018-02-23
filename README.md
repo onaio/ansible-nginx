@@ -119,6 +119,12 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
+      ssl:
+        enabled: true
+        cert: "cert_file"
+        key: "key_file"
+        src_dir: "files"
+        conf: "foo-ssl.conf"
       location1:
         name: "/"
         try_files: "$uri $uri/ /index.html"
@@ -127,6 +133,8 @@ nginx_sites:
       name: bar
       listen: 8888
       server_name: webmail.localhost
+      ssl:
+        enabled: false
       location1:
         name: /
         try_files: "$uri $uri/ /index.html"

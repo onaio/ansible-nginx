@@ -1,7 +1,7 @@
 server {
 
 {% for k,v in item.server.iteritems() %}
-{% if k.find('location') == -1 and k != 'name' %}
+{% if k.find('location') == -1 and k != 'name' and k != 'ssl' %}
 {% if v is not string and v is iterable %}
 {% for lv in v %}
   {{ k }} {{ lv }};
@@ -9,6 +9,9 @@ server {
 {% else %}
   {{ k }} {{ v }};
 {% endif %}
+{% endif %}
+{% if k.find('location') == -1 and k == 'ssl' and v['enabled'] %}
+  include /etc/nginx/{{ v['conf'] }};
 {% endif %}
 {% endfor %}
 
