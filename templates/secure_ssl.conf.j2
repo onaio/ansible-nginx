@@ -1,11 +1,11 @@
 # SSL log files
-access_log    {{ nginx_log_path }}/{{ nginx_server_name }}-ssl-access.log;
-error_log     {{ nginx_log_path }}/{{ nginx_server_name }}-ssl-error.log;
+access_log    {{ nginx_log_path }}/{{ site.server.name }}-ssl-access.log;
+error_log     {{ nginx_log_path }}/{{ site.server.name }}-ssl-error.log;
 
 # certs
-ssl_certificate           {{ nginx_cert_path }};
-ssl_certificate_key       {{ nginx_key_path }};
-ssl_trusted_certificate   {{ nginx_cert_path }};
+ssl_certificate           /etc/nginx/ssl/{{ site.server.ssl.cert }};
+ssl_certificate_key       /etc/nginx/ssl/{{ site.server.ssl.key }};
+ssl_trusted_certificate   /etc/nginx/ssl/{{ site.server.ssl.cert }};
 
 # SSL opts
 ssl on;
