@@ -179,3 +179,6 @@ nginx_status_port: 8890
 nginx_log_path: /var/log/nginx
 nginx_cert_path: /etc/nginx/crt
 nginx_key_path: /etc/nginx/key
+
+# hostname
+nginx_set_hostname: False
