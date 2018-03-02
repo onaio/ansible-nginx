@@ -90,7 +90,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 
 `nginx_source_modules_included` is a dictionary (k,v) where k is the module name, and v its accompanying configure flag. All the possible options are given below:
 
-```yaml
+```yml
 nginx_source_modules_included:
   http_stub_status_module: "--with-http_stub_status_module"
   http_ssl_module: "--with-http_ssl_module"
@@ -113,7 +113,7 @@ nginx_source_modules_included:
 
 There is a possibility to configure a list of servers to be available (not yet enabled) as well. Just provide a list of dictionaries according to the following format:
 
-```yaml
+```yml
 nginx_sites:
   - server:
       name: foo
@@ -150,12 +150,12 @@ The final example shows how to set multiple directives.
 
 To enable or disable specific sites you can add prior used `server_name` attribute to the variables `nginx_enabled_sites` and `nginx_disabled_sites`.
 
-```yaml
+```yml
 nginx_enabled_sites:
   - localhost
 ```
 
-```yaml
+```yml
 nginx_disabled_sites:
   - webmail.localhost
 ```
