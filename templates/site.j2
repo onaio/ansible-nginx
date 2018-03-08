@@ -4,10 +4,12 @@ server {
 {% if k.find('location') == -1 and k != 'name' and k != 'ssl' %}
 {% if v is not string and v is iterable %}
 {% for lv in v %}
-  {{ k }} {{ lv }};
+  {{ k|replace('__', '') }} {{ lv }}{% if k.find('__') == -1 %};
+{% endif %}
 {% endfor %}
 {% else %}
-  {{ k }} {{ v }};
+  {{ k|replace('__', '') }} {{ v }}{% if k.find('__') == -1 %};
+{% endif %}
 {% endif %}
 {% endif %}
 {% if k.find('location') == -1 and k == 'ssl' and v['enabled'] %}
@@ -20,10 +22,12 @@ server {
 {% for x,y in v.iteritems() if x != 'name' %}
 {% if y is not string and y is iterable %}
 {% for ly in y %}
-    {{ x }} {{ ly }};
+    {{ x|replace('__', '') }} {{ ly }}{% if x.find('__') == -1 %};
+{% endif %}
 {% endfor %}
 {% else %}
-    {{ x }} {{ y }};
+    {{ x|replace('__', '') }} {{ y }}{% if x.find('__') == -1 %};
+{% endif %}
 {% endif %}
 {% endfor %}
   }
