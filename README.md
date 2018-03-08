@@ -148,6 +148,18 @@ nginx_sites:
 
 The final example shows how to set multiple directives.
 
+You can prevent the role from adding a semi-colon and a carriage return after a value defined in nginx_sites by prepending two underscores (`__`) to the key:
+
+```yml
+nginx_sites:
+  - server:
+      name: foo
+      listen: 8080
+      __server_name: localhost
+```
+
+The site file for the site defined above will not have a semi-colon and carriage return added after the value for "server_name";
+
 To enable or disable specific sites you can add prior used `server_name` attribute to the variables `nginx_enabled_sites` and `nginx_disabled_sites`.
 
 ```yml
