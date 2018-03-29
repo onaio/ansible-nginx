@@ -176,7 +176,6 @@ openssl_version: "1.0.2h"
 nginx_status_port: 8890
 
 # secur_ssl.conf
-nginx_log_path: /var/log/nginx
 nginx_cert_path: /etc/nginx/crt
 nginx_key_path: /etc/nginx/key
 
