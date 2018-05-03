@@ -22,6 +22,7 @@
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
       dest: "/etc/nginx/ssl/{{ site.server.ssl.cert }}"
       mode: 0600
+      remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
       - restart nginx
 
@@ -30,6 +31,7 @@
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
       dest: "/etc/nginx/ssl/{{ site.server.ssl.key }}"
       mode: 0600
+      remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
       - restart nginx
 
