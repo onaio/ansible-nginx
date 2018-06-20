@@ -13,14 +13,15 @@
   - name: Ensure ssl directory is present
     file:
       state: directory
-      path: /etc/nginx/ssl
+      path: "{{ nginx_ssl_dir }}"
       owner: root
       mode: 0700
+      recurse: yes
 
   - name: Copy SSL certificate
     copy:
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-      dest: "/etc/nginx/ssl/{{ site.server.ssl.cert }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
       mode: 0600
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
@@ -29,7 +30,7 @@
   - name: Copy SSL key
     copy:
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
-      dest: "/etc/nginx/ssl/{{ site.server.ssl.key }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
       mode: 0600
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
