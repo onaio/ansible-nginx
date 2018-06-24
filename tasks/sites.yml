@@ -26,6 +26,7 @@
   with_items: "{{nginx_enabled_sites}}"
   notify:
     - reload nginx
+    - restart certbot
   when: nginx_enabled_sites|lower != 'none'
 
 - name: Nginx | Disable sites
@@ -36,8 +37,3 @@
   notify:
     - reload nginx
   when: nginx_disabled_sites|lower != 'none'
-
-- include_tasks: ssl.yml
-  vars:
-    site: "{{ item }}"
-  with_items: "{{ nginx_sites }}"

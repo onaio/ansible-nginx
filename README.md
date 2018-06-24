@@ -119,12 +119,7 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
-      ssl:
-        enabled: true
-        cert: "cert_file"
-        key: "key_file"
-        src_dir: "files"
-        conf: "foo-ssl.conf"
+      ssl: on
       location1:
         name: "/"
         try_files: "$uri $uri/ /index.html"
@@ -133,8 +128,6 @@ nginx_sites:
       name: bar
       listen: 8888
       server_name: webmail.localhost
-      ssl:
-        enabled: false
       location1:
         name: /
         try_files: "$uri $uri/ /index.html"
@@ -231,7 +224,7 @@ To the contributors:
 
 
 #### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`. 
+This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`.
 
 See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
 
