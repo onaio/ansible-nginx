@@ -75,7 +75,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
         nginx_access_logs:
           - name: "combined"
             filename: "access.log"
-
+- `nginx_access_log_format_name` - the name of the nginx access log to use.
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
 
