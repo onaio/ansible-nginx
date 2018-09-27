@@ -1,0 +1,6 @@
+- name: Include load balancer
+  template:
+    src: etc/nginx/conf.d/load-balancer.conf.j2
+    dest: /etc/nginx/conf.d/load-balancer.conf
+    mode: 0644
+  when: nginx_loadbalancer is defined and nginx_loadbalancer
