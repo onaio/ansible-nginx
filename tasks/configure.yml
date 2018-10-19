@@ -29,3 +29,8 @@
     state: started
   register: nginx_first_start
   when: not nginx_config.stat.exists
+
+- name: Nginx | Enable the Nginx service
+  service:
+    name: nginx
+    enabled: yes
