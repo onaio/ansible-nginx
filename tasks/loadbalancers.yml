@@ -6,9 +6,9 @@
     group: root
     mode: 0755
 
-- name: Include load balancer
+- name: Copy over the load balancer config
   template:
-    src: load-balancers.conf.j2
-    dest: /etc/nginx/conf.d/load-balancers.conf
+    src: load-balancer.conf.j2
+    dest: /etc/nginx/conf.d/load-balancer-{{ item.upstream_name }}.conf
     mode: 0644
-  when: nginx_loadbalancers is defined
+  with_items: "{{ nginx_loadbalancers }}"
