@@ -1,0 +1,10 @@
+{% for loadbalancer in nginx_loadbalancers %}
+upstream {{ loadbalancer.upstream_name }} {
+{% if loadbalancer.method is defined %}
+  {{ loadbalancer.method }};
+{% endif %}
+{% for host in loadbalancer.hosts %}
+  server {{ host }};
+{% endfor %}
+}
+{% endfor %}
