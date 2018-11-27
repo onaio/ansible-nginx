@@ -12,3 +12,5 @@
   when: nginx_loadbalancer is defined and nginx_loadbalancer == true
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
+- include: monitoring.yml
+  when: nginx_enable_monitoring is defined and nginx_enable_monitoring == true
