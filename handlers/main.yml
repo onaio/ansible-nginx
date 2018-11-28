@@ -1,9 +1,13 @@
 # file: nginx/handlers/main.yml
+- name: start nginx
+  service: name=nginx state=started
+  become: yes
+  register: nginx_started
 
 - name: restart nginx
   service: name=nginx state=restarted
   become: yes
-  when: not nginx_first_start.changed
+  when: nginx_started is undefined or nginx_started.changed == False
 
 - name: reload nginx
   service: name=nginx state=reloaded

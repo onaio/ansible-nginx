@@ -172,6 +172,28 @@ nginx_disabled_sites:
   - webmail.localhost
 ```
 
+##### Load Balancers
+
+You can configure load balancers using the `nginx_loadbalancers` varialbe. This will configure load balancers (with config files stored in `/etc/nginx/conf.d`) that you can choose to proxy_pass to:
+
+Here are two example load balancers:
+
+```yml
+nginx_loadbalancers:
+  - upstream_name: "lb1"
+    method: least_conn
+    hosts:
+      - "127.0.0.1:8080"
+      - "10.0.0.1:8080"
+  - upstream_name: "lb2"
+    method: least_conn
+    hosts:
+      - "127.0.0.1:9000"
+      - "10.0.0.1:9000"
+```
+
+This role will create the files `/etc/nginx/conf.d/load-balancer-lb1.conf` and `/etc/nginx/conf.d/load-balancer-lb2.conf`. You can then proxy-pass to the load balancers using the NGINX `proxy_pass` directive (e.g `proxy-pass http://lb1;`. Use the equivalent ansible variable to achieve this in the site configuration described above.
+
 ##### Monit ?
 You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
 
