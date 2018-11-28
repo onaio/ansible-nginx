@@ -3,6 +3,11 @@
   service: name=nginx state=reloaded
   become: yes
 
+- name: start nginx
+  service: name=nginx state=started
+  become: yes
+  register: nginx_started
+
 - name: restart nginx
   service: name=nginx state=restarted
   become: yes

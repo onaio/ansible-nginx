@@ -59,6 +59,7 @@ nginx_default_enable: yes
 
 # site inventory
 nginx_sites: []
+nginx_loadbalancers: []
 nginx_enabled_sites: []
 nginx_disabled_sites: []
 

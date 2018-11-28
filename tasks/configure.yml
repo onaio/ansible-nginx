@@ -23,12 +23,16 @@
   notify:
     - restart nginx
 
-- name: Nginx | Start Nginx the first time
-  service:
-    name: nginx
-    state: started
-  register: nginx_first_start
-  when: not nginx_config.stat.exists
+- name: Nginx | Check if Nginx is running
+  shell: "service nginx status"
+  ignore_errors: yes
+  register: nginx_started_check
+
+- name: Nginx | Notify Nginx service start
+  command: "echo Nginx service scheduled to start"
+  when: nginx_started_check.rc != 0
+  notify:
+   - start nginx
 
 - name: Nginx | Enable the Nginx service
   service:

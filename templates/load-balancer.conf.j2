@@ -1,10 +1,8 @@
-{% for loadbalancer in loadbalancers %}
-upstream {{ loadbalancer.upstream_name }} {
-{% if loadbalancer.method is defined %}
-{{ loadbalancer.method }};
+upstream {{ item.upstream_name }} {
+{% if item.method is defined %}
+  {{ item.method }};
 {% endif %}
-{% for host in loadbalancer.hosts %}
-    server {{ host }};
+{% for host in item.hosts %}
+  server {{ host }};
 {% endfor %}
 }
-{% endfor %}
