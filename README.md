@@ -200,6 +200,10 @@ You can put Nginx under monit monitoring protection, by setting `monit_protectio
 
 ##### Modules
 
+###### Monitoring
+- `nginx_enable_monitoring` - Whether or not to enable nginx status page that is used for monitoring.
+- `nginx_status_endpoint` - url endpoint for the nginx status page. default is `"status"` which will allw you to access the status page when you load http://127.0.0.1/status
+
 ###### gzip module
 - 'nginx_gzip' - whether to use gzip, can be "on" or "off"
 - 'nginx_gzip_http_version'
