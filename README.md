@@ -75,7 +75,6 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
         nginx_access_logs:
           - name: "combined"
             filename: "access.log"
-- `nginx_access_log_format_name` - the name of the nginx access log to use.
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
 
@@ -119,6 +118,7 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
+      access_log_format: "{{ nginx_access_logs.0.name }}"
       ssl:
         enabled: true
         cert: "cert_file"
@@ -133,6 +133,7 @@ nginx_sites:
       name: bar
       listen: 8888
       server_name: webmail.localhost
+      access_log_format: "{{ nginx_access_logs.0.name }}"
       ssl:
         enabled: false
       location1:
