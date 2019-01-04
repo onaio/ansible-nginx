@@ -133,7 +133,6 @@ nginx_sites:
       name: bar
       listen: 8888
       server_name: webmail.localhost
-      access_log_format: "{{ nginx_access_logs.0.name }}"
       ssl:
         enabled: false
       location1:
