@@ -1,5 +1,5 @@
 # SSL log files
-access_log    {{ nginx_log_dir }}/{{ site.server.name }}-ssl-access.log {{ nginx_access_log_format_name }};
+access_log    {{ nginx_log_dir }}/{{ site.server.name }}-ssl-access.log{% if site.server.access_log_format is defined %} {{ site.server.access_log_format }}{% endif %};
 error_log     {{ nginx_log_dir }}/{{ site.server.name }}-ssl-error.log;
 
 # certs
