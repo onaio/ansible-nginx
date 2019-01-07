@@ -13,7 +13,7 @@
   - name: Ensure ssl directory is present
     file:
       state: directory
-      path: "{{ nginx_ssl_dir }}"
+      path: "{{  site.server.ssl.ssl_dir | default(nginx_ssl_dir) }}"
       owner: root
       mode: 0700
       recurse: yes
@@ -21,7 +21,7 @@
   - name: Copy SSL certificate
     copy:
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
+      dest: "{{  site.server.ssl.ssl_dir | default(nginx_ssl_dir)  }}/{{ site.server.ssl.cert }}"
       mode: 0600
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
@@ -30,7 +30,7 @@
   - name: Copy SSL key
     copy:
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
-      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
+      dest: "{{  site.server.ssl.ssl_dir | default(nginx_ssl_dir)  }}/{{ site.server.ssl.key }}"
       mode: 0600
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
@@ -39,3 +39,14 @@
   - name: Generate secure Diffie Hellman ephemeral parameters
     command: openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
   when: site.server.ssl.enabled == True
+
+# is the remote certs to be:
+#   copied:
+#     use current tasks
+#     Figure out how to re-copy the files when certs are renewed
+#   symlinked:
+#     add flag to switch to symlink,
+#     add variables to symlink destination,
+#     add tasks to create symlink,
+# should we symlink all remote_src files?
+# should we use certbot directly?

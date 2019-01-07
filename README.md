@@ -144,6 +144,22 @@ nginx_sites:
         proxy_set_header:
          - header1 valA
          - header2 valB
+  - server:
+      name: baz
+      listen: 8080
+      server_name: example.com
+      ssl:
+        enabled: true
+        remote_src: yes
+        cert: "cert.pem"
+        key: "privkey.pem"
+        src_dir: "/etc/letsencrypt/live/example.com"
+        conf: "baz-ssl.conf"
+        ssl_dir: "/etc/letsencrypt/live/example.com"
+      location1:
+        name: "/"
+        try_files: "$uri $uri/ /index.html"
+        sendfile: "on"
 ```
 
 The final example shows how to set multiple directives.
