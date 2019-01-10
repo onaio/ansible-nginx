@@ -155,7 +155,7 @@ nginx_sites:
         key: "privkey.pem"
         src_dir: "/etc/letsencrypt/live/example.com"
         conf: "baz-ssl.conf"
-        ssl_dir: "/etc/letsencrypt/live/example.com"
+        create_symlink: true
       location1:
         name: "/"
         try_files: "$uri $uri/ /index.html"
