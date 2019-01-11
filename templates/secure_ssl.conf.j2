@@ -3,9 +3,9 @@ access_log    {{ nginx_log_dir }}/{{ site.server.name }}-ssl-access.log;
 error_log     {{ nginx_log_dir }}/{{ site.server.name }}-ssl-error.log;
 
 # certs
-ssl_certificate           {{ nginx_ssl_dir  }}/{{ site.server.ssl.cert }};
-ssl_certificate_key       {{ nginx_ssl_dir  }}/{{ site.server.ssl.key }};
-ssl_trusted_certificate   {{ nginx_ssl_dir  }}/{{ site.server.ssl.cert }};
+ssl_certificate           {{ nginx_ssl_dir }}/{{ site.server.ssl.cert }};
+ssl_certificate_key       {{ nginx_ssl_dir }}/{{ site.server.ssl.key }};
+ssl_trusted_certificate   {{ nginx_ssl_dir }}/{{ site.server.ssl.cert }};
 
 # SSL opts
 ssl on;
