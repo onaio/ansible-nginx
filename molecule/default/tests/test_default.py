@@ -6,9 +6,23 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_hosts_file(host):
-    f = host.file('/etc/hosts')
+# Figure out how to test the service's state
+# Docker containers don't ship with init systems
+#
+# def test_nginx_service(host):
+#     nginx = host.service("nginx")
+#
+#
+#     assert nginx.is_running
+#     assert nginx.is_enabled
 
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+
+def test_packages(host):
+    pkg = host.package("nginx")
+
+    assert pkg.is_installed
+    # assert pkg.version.startswith("")
+
+
+def test_deployed_site(host):
+    assert host.socket("tcp://0.0.0.0:80").is_listening
