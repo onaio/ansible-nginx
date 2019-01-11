@@ -23,17 +23,6 @@
   notify:
     - restart nginx
 
-- name: Nginx | Check if Nginx is running
-  shell: "service nginx status"
-  ignore_errors: yes
-  register: nginx_started_check
-
-- name: Nginx | Notify Nginx service start
-  command: "echo Nginx service scheduled to start"
-  when: nginx_started_check.rc != 0
-  notify:
-   - start nginx
-
 - name: Nginx | Enable the Nginx service
   service:
     name: nginx
