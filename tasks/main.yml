@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/main.yml
 
 - include: package.yml

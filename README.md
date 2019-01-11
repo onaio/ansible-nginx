@@ -1,4 +1,4 @@
-## onaio - nginx [![Build Status](https://travis-ci.org/onaio/nginx.svg?branch=master)](https://travis-ci.org/onaio/nginx)
+## onaio - nginx [![Build Status](https://travis-ci.org/onaio/ansible-nginx.svg?branch=master)](https://travis-ci.org/onaio/ansible-nginx)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
@@ -75,7 +75,6 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
         nginx_access_logs:
           - name: "combined"
             filename: "access.log"
-
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
 
@@ -119,6 +118,7 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
+      access_log_format: "{{ nginx_access_logs.0.name }}"
       ssl:
         enabled: true
         cert: "cert_file"
@@ -273,15 +273,18 @@ To the contributors:
 
 
 #### Testing
-This project comes with a VagrantFile, this is a fast and easy way to test changes to the role, fire it up with `vagrant up`. 
 
-See [vagrant docs](https://docs.vagrantup.com/v2/) for getting setup with vagrant
+We use [Molecule](https://molecule.readthedocs.io/en/latest/) to run this role's tests. Use the following command to setup molecule on your machine:
 
-There are two ways to test the install: compiling nginx from source or installing from a package manager.
-By default nginx compiles from source, however if desired, we can set a command line variable to install
-from the package manager
+```sh
+pip install ansible molecule docker-py
+```
 
-    export NGINX_INSTALL_METHOD=package
+To run the tests, run:
+
+```sh
+molecule test
+```
 
 #### License
 

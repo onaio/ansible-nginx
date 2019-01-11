@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/ssl.yml
 - block:
   - name: Copy secure ssl configuration
@@ -16,7 +17,7 @@
       path: "{{ nginx_ssl_dir }}"
       owner: root
       mode: 0700
-      recurse: yes
+      recurse: true
 
   - block:
     - name: Copy SSL certificate

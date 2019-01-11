@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/source.yml
 
 - include: user.yml
@@ -5,7 +6,7 @@
 
 - name: Nginx | Make sure the Nginx build dependencies are installed
   apt:
-    update_cache: yes
+    update_cache: true
     pkg: "{{item}}"
     state: present
   with_items:
@@ -32,7 +33,7 @@
 
 - name: Nginx | Kill Nginx (old threads)
   command: pkill nginx
-  ignore_errors: yes
+  ignore_errors: true
   when: nginx_flags.changed
 
 - name: Nginx | Compile the Nginx source
@@ -48,7 +49,7 @@
     path: /usr/local/nginx/default
     src: "{{nginx_source_prefix}}"
     state: link
-    force: yes
+    force: true
 
 - name: Nginx | Install the upstart init script
   template:
@@ -63,4 +64,4 @@
 - name: Nginx | Register Nginx as a service
   service:
     name: nginx
-    enabled: yes
+    enabled: true
