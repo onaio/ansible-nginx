@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/http_echo_module.yml
 # configure flag: --add-module=/tmp/nginx_echo
 

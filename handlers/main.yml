@@ -1,12 +1,13 @@
+---
 # file: nginx/handlers/main.yml
 - name: reload nginx
   service: name=nginx state=reloaded
-  become: yes
+  become: true
 
 - name: start nginx
   service: name=nginx state=started
-  become: yes
+  become: true
 
 - name: restart nginx
   service: name=nginx state=restarted
-  become: yes
+  become: true

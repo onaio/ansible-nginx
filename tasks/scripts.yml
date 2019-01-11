@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/scripts.yml
 
 - name: Nginx | Copy the nxensite and nxdissite scripts

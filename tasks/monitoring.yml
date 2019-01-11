@@ -1,3 +1,4 @@
+---
 - name: Include Monitoring
   template:
     src: monitoring.conf.j2
