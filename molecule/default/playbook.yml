@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: ansible-nginx
+      nginx_install_method: "package"
+      nginx_sites:
+      - server:
+          name: bar
+          listen: 80
+          server_name: webmail.localhost
+          ssl:
+            enabled: false
+          location1:
+            name: /
+            try_files: "$uri $uri/ /index.html"
+          location2:
+            name: /images/
+            try_files: "$uri $uri/ /index.html"
+            proxy_set_header:
+            - Host $host
