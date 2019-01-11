@@ -23,7 +23,7 @@
     - name: Copy SSL certificate
       copy:
         src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-        dest: "{{ nginx_ssl_dir  }}/{{ site.server.ssl.cert }}"
+        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
         mode: 0600
         remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
       notify:
@@ -42,14 +42,14 @@
     - name: Create SSL certificate symlink
       file:
         src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-        dest:  "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
+        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
         state: link
       notify:
         - restart nginx
     - name: Create SSL key symlink
       file:
         src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
-        dest:  "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
+        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
         state: link
       notify:
         - restart nginx
