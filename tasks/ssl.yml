@@ -19,40 +19,42 @@
       mode: 0700
       recurse: true
 
-  - block:
-    - name: Copy SSL certificate
-      copy:
-        src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
-        mode: 0600
-        remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
-      notify:
-        - restart nginx
-
-    - name: Copy SSL key
-      copy:
-        src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
-        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
-        mode: 0600
-        remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
-      notify:
-        - restart nginx
+  - name: Copy SSL certificate
+    copy:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
+      mode: 0600
+      remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
+    notify:
+      - restart nginx
     when: site.server.ssl.create_symlink is not defined or site.server.ssl.create_symlink == false
-  - block:
-    - name: Create SSL certificate symlink
-      file:
-        src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
-        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
-        state: link
-      notify:
-        - restart nginx
-    - name: Create SSL key symlink
-      file:
-        src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
-        dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
-        state: link
-      notify:
-        - restart nginx
+
+  - name: Copy SSL key
+    copy:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
+      mode: 0600
+      remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
+    notify:
+      - restart nginx
+    when: site.server.ssl.create_symlink is not defined or site.server.ssl.create_symlink == false
+
+  - name: Create SSL certificate symlink
+    file:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
+      state: link
+    notify:
+      - restart nginx
+    when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
+
+  - name: Create SSL key symlink
+    file:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
+      state: link
+    notify:
+      - restart nginx
     when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
 
   - name: Generate secure Diffie Hellman ephemeral parameters
