@@ -1,3 +1,4 @@
+---
 - name: Make sure /etc/nginx/conf.d Exists
   file:
     path: /etc/nginx/conf.d

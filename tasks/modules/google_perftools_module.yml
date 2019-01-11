@@ -1,3 +1,4 @@
+---
 # file: roles/nginx/tasks/modules/google_perftools_module.yml
 # configure flag: --with-google_perftools_module
 

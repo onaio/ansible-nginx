@@ -1,3 +1,4 @@
+---
 # nginx/tasks/configure.yml
 
 - name: Nginx | Make sure the mime.types file is up to date
@@ -26,4 +27,4 @@
 - name: Nginx | Enable the Nginx service
   service:
     name: nginx
-    enabled: yes
+    enabled: true

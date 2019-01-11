@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/http_stub_status_module.yml
 # configure flag: --with-http_stub_status_module
 
@@ -16,4 +17,4 @@
     path: "{{nginx_dir}}/sites-enabled/nginx_status"
     src: "{{nginx_dir}}/sites-available/nginx_status"
     state: link
-    force: yes
+    force: true

@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/commons.yml
 
 - name: Nginx | Make sure the nginx directory exists

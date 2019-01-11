@@ -1,3 +1,4 @@
+---
 # file: nginx/meta/main.yml
 
 galaxy_info:
@@ -7,11 +8,11 @@ galaxy_info:
   min_ansible_version: 1.9
   license: MIT
   platforms:
-  - name: Ubuntu
-    versions:
-    - all
+    - name: Ubuntu
+      versions:
+        - all
   categories:
-  - system
+    - system
 
 dependencies:
   - role: ANXS.hostname

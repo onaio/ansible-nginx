@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/authorized_ips.yml
 
 - name: Nginx | Modules | Updated the authorized_ip file

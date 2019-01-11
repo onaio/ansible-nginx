@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/http_geoip_module.yml
 # configure flag: --with-http_geoip_module
 

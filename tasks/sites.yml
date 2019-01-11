@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/sites.yml
 
 - name: Nginx | Update the configurations for the sites inventory

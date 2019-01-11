@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/default_site.yml
 
 - name: Nginx | Make sure the default site root directory is present

@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/ngx_pagespeed.yml
 # configure flag: --add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta
 

@@ -1,3 +1,4 @@
+---
 # file: nginx/tasks/modules/upload_progress_module.yml
 # configure flag: --add-module=/tmp/nginx_upload_progress
 
