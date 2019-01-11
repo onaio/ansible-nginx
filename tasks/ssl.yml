@@ -36,7 +36,7 @@
         remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
       notify:
         - restart nginx
-    when: site.server.ssl.create_symlink | default(False) == False
+    when: site.server.ssl.create_symlink is not defined or site.server.ssl.create_symlink == false
   - block:
     - name: Create SSL certificate symlink
       file:
@@ -52,7 +52,7 @@
         state: link
       notify:
         - restart nginx
-    when: site.server.ssl.create_symlink | default(False) == True
+    when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
 
   - name: Generate secure Diffie Hellman ephemeral parameters
     command: openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
