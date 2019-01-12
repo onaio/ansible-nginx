@@ -16,8 +16,8 @@
       state: directory
       path: "{{ nginx_ssl_dir }}"
       owner: root
+      group: root
       mode: 0700
-      recurse: true
 
   - name: Copy SSL certificate
     copy:
