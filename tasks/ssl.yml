@@ -16,8 +16,8 @@
       state: directory
       path: "{{ nginx_ssl_dir }}"
       owner: root
+      group: root
       mode: 0700
-      recurse: true
 
   - name: Copy SSL certificate
     copy:
@@ -27,6 +27,7 @@
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
       - restart nginx
+    when: site.server.ssl.create_symlink is not defined or site.server.ssl.create_symlink == false
 
   - name: Copy SSL key
     copy:
@@ -36,6 +37,25 @@
       remote_src: "{{ site.server.ssl.remote_src | default('no') }}"
     notify:
       - restart nginx
+    when: site.server.ssl.create_symlink is not defined or site.server.ssl.create_symlink == false
+
+  - name: Create SSL certificate symlink
+    file:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
+      state: link
+    notify:
+      - restart nginx
+    when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
+
+  - name: Create SSL key symlink
+    file:
+      src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
+      dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
+      state: link
+    notify:
+      - restart nginx
+    when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
 
   - name: Generate secure Diffie Hellman ephemeral parameters
     command: openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
