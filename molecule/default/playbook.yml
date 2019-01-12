@@ -1,10 +1,33 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+    - name: Copy the test ssl files
+      copy:
+        src: "{{ item }}"
+        dest: "/tmp/{{ item }}"
+      with_items:
+        - certificate.pem
+        - key.pem
   roles:
     - role: ansible-nginx
       nginx_install_method: "package"
+      nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
       nginx_sites:
+        - server:
+            name: foo
+            listen: 443
+            server_name: example.org
+            ssl:
+              enabled: true
+              cert: "certificate.pem"
+              key: "key.pem"
+              src_dir: "files"
+              conf: "example.org.conf"
+            location1:
+              name: "/"
+              try_files: "$uri $uri/ /index.html"
+              sendfile: "on"
         - server:
             name: bar
             listen: 80
@@ -19,3 +42,19 @@
               try_files: "$uri $uri/ /index.html"
               proxy_set_header:
                 - Host $host
+        - server:
+            name: foobar
+            listen: 443
+            server_name: example2.org
+            ssl:
+              enabled: true
+              remote_src: true
+              create_symlink: true
+              cert: "certificate.pem"
+              key: "key.pem"
+              src_dir: "/tmp"
+              conf: "example2.org.conf"
+            location1:
+              name: "/"
+              try_files: "$uri $uri/ /index.html"
+              sendfile: "on"
