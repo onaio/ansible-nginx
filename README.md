@@ -146,7 +146,7 @@ nginx_sites:
          - header2 valB
   - server:
       name: baz
-      listen: 8080
+      listen: 443
       server_name: example.com
       ssl:
         enabled: true
@@ -154,7 +154,7 @@ nginx_sites:
         cert: "cert.pem"
         key: "privkey.pem"
         src_dir: "/etc/letsencrypt/live/example.com"
-        conf: "baz-ssl.conf"
+        conf: "example.com.conf"
         create_symlink: true
       location1:
         name: "/"
