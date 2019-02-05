@@ -10,6 +10,7 @@
 - include: default_site.yml
 - include: sites.yml
 - include: loadbalancers.yml
+- include: basic-auth.yml
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
 - include: monitoring.yml

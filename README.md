@@ -211,8 +211,26 @@ nginx_loadbalancers:
 This role will create the files `/etc/nginx/conf.d/load-balancer-lb1.conf` and `/etc/nginx/conf.d/load-balancer-lb2.conf`. You can then proxy-pass to the load balancers using the NGINX `proxy_pass` directive (e.g `proxy-pass http://lb1;`. Use the equivalent ansible variable to achieve this in the site configuration described above.
 
 ##### Monit ?
+
 You can put Nginx under monit monitoring protection, by setting `monit_protection: yes`
 
+##### Basic Authentication
+
+This role can generate password files that you can use with [NGINX basic authentication](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/). Specify the password files you want to generate in the `nginx_basic_auth_files` variable.
+
+```yml
+nginx_basic_auth_files:
+  - path: "/etc/nginx/.htpasswd"
+    users:
+      - username: "admin"
+        password: "somepassword"
+        state: "present"
+      - username: "old-admin"
+        password: "somepassword"
+        state: "absent"
+```
+
+You can then use a generate password file in your site configuration using the `auth_basic_user_file` directive.
 
 ##### Modules
 
