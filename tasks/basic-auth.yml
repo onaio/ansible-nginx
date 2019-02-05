@@ -1,0 +1,10 @@
+---
+- name: Make sure the passlib library is installed
+  apt:
+    pkg: python-passlib
+    state: present
+
+- include_tasks: basic-auth-file.yml
+  with_items: "{{ nginx_basic_auth_files }}"
+  loop_control:
+    loop_var: "nginx_current_basic_auth_file"

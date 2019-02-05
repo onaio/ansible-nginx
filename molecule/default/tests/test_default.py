@@ -83,3 +83,10 @@ def test_copied_files(host):
     assert keyFile.user == "root"
     assert keyFile.group == "root"
     assert keyFile.is_symlink
+
+
+def test_basic_auth_files(host):
+    pwFile = host.file("/tmp/etc/nginx/.htpasswd")
+    assert pwFile.exists
+    assert pwFile.user == "root"
+    assert pwFile.group == "root"

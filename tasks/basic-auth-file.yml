@@ -1,0 +1,18 @@
+---
+- name: Make sure the directory to put the password file exists
+  file:
+    path: "{{ nginx_current_basic_auth_file.path | dirname }}"
+    state: directory
+
+- name: Manage users in the password file
+  htpasswd:
+    path: "{{ nginx_current_basic_auth_file.path }}"
+    name: "{{ item.username }}"
+    password: "{{ item.password }}"
+    state: "{{ item.state }}"
+    crypt_scheme: apr_md5_crypt
+    owner: root
+    group: root
+    mode: 0640
+  with_items: "{{ nginx_current_basic_auth_file.users }}"
+  no_log: true
