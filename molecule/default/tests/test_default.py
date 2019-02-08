@@ -62,6 +62,12 @@ def test_copied_files(host):
     sslALog = "/var/log/nginx/foo-ssl-access.log example_com_access_format;"
     assert sslALog in sslCnf.content_string
 
+    ngxCnf = host.file("/etc/nginx/nginx.conf")
+    aLogLn = str("log_format  example_com_access_format  $http_x_forwarded_for"
+                 " - $remote_user [$time_local] $status $body_bytes_sent"
+                 " $request_length;")
+    assert aLogLn in ngxCnf.content_string
+
     # second ssl site
     certDir = host.file("/etc/nginx/ssl/tests/example2.org")
     assert certDir.exists
