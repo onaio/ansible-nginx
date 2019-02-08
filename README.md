@@ -118,13 +118,13 @@ nginx_sites:
       name: foo
       listen: 8080
       server_name: localhost
-      access_log_format: "{{ nginx_access_logs.0.name }}"
       ssl:
         enabled: true
         cert: "cert_file"
         key: "key_file"
         src_dir: "files"
         conf: "foo-ssl.conf"
+        access_log_format: "{{ nginx_access_logs.0.name }}"
       location1:
         name: "/"
         try_files: "$uri $uri/ /index.html"

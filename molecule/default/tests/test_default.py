@@ -58,6 +58,10 @@ def test_copied_files(host):
     assert keyFile.sha256sum == keyHsh
     assert oct(keyFile.mode) == "0600"
 
+    sslCnf = host.file("/etc/nginx/example.org.conf")
+    sslALog = "/var/log/nginx/foo-ssl-access.log example_com_access_format;"
+    assert sslALog in sslCnf.content_string
+
     # second ssl site
     certDir = host.file("/etc/nginx/ssl/tests/example2.org")
     assert certDir.exists

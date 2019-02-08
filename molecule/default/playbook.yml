@@ -13,6 +13,11 @@
     - role: ansible-nginx
       nginx_install_method: "package"
       nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
+      nginx_access_logs:
+        - name: "example_com_access_format"
+          format: "$http_x_forwarded_for - $remote_user [$time_local] $status $body_bytes_sent $request_length"
+          options: null
+          filename: "access.log"
       nginx_sites:
         - server:
             name: foo
@@ -24,6 +29,7 @@
               key: "key.pem"
               src_dir: "files"
               conf: "example.org.conf"
+              access_log_format: "{{ nginx_access_logs.0.name }}"
             location1:
               name: "/"
               try_files: "$uri $uri/ /index.html"
