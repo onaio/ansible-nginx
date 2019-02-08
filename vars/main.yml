@@ -1,2 +1,4 @@
 ---
 # vars file for ansible-nginx
+nginx_system_user: "www-data"
+nginx_system_group: "www-data"

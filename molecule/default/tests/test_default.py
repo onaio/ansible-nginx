@@ -88,5 +88,5 @@ def test_copied_files(host):
 def test_basic_auth_files(host):
     pwFile = host.file("/tmp/etc/nginx/.htpasswd")
     assert pwFile.exists
-    assert pwFile.user == "root"
-    assert pwFile.group == "root"
+    assert pwFile.user == "www-data"
+    assert pwFile.group == "www-data"
