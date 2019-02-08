@@ -11,8 +11,8 @@
     password: "{{ item.password }}"
     state: "{{ item.state }}"
     crypt_scheme: apr_md5_crypt
-    owner: root
-    group: root
+    owner: "{{ nginx_system_user }}"
+    group: "{{ nginx_system_group }}"
     mode: 0640
   with_items: "{{ nginx_current_basic_auth_file.users }}"
   no_log: true
