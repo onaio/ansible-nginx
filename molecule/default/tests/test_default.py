@@ -9,7 +9,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_nginx_service(host):
     nginx = host.service("nginx")
 
-
     assert nginx.is_running
     assert nginx.is_enabled
 
