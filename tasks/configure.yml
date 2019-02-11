@@ -28,3 +28,4 @@
   service:
     name: nginx
     enabled: true
+    use: service
