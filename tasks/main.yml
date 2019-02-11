@@ -11,6 +11,7 @@
 - include: sites.yml
 - include: loadbalancers.yml
 - include: basic-auth.yml
+  when: nginx_basic_auth_files|length > 0
 - include: monit.yml
   when: monit_protection is defined and monit_protection == true
 - include: monitoring.yml
