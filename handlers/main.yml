@@ -5,9 +5,9 @@
   become: true
 
 - name: start nginx
-  service: name=nginx state=started
+  service: name=nginx state=started enabled=yes use=service
   become: true
 
 - name: restart nginx
-  service: name=nginx state=restarted
+  service: name=nginx state=restarted enabled=yes use=service
   become: true

@@ -23,8 +23,3 @@
     mode: 0644
   notify:
     - restart nginx
-
-- name: Nginx | Enable the Nginx service
-  service:
-    name: nginx
-    enabled: true

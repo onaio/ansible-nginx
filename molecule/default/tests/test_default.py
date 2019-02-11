@@ -6,15 +6,11 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-# Figure out how to test the service's state
-# Docker containers don't ship with init systems
-#
-# def test_nginx_service(host):
-#     nginx = host.service("nginx")
-#
-#
-#     assert nginx.is_running
-#     assert nginx.is_enabled
+def test_nginx_service(host):
+    nginx = host.service("nginx")
+
+    assert nginx.is_running
+    assert nginx.is_enabled
 
 
 def test_packages(host):
