@@ -24,8 +24,3 @@
   notify:
     - restart nginx
 
-- name: Nginx | Enable the Nginx service
-  service:
-    name: nginx
-    enabled: true
-    use: service
