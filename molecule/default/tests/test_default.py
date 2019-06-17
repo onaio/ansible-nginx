@@ -34,7 +34,7 @@ def test_copied_files(host):
     assert certDir.user == "root"
     assert certDir.group == "root"
     assert certDir.is_directory
-    assert oct(certDir.mode) == "0700"
+    assert oct(certDir.mode) == "0o700"
 
     certFile = host.file("/etc/nginx/ssl/tests/example.org/certificate.pem")
     crtHsh = "46723fb5c01c28680e9a4cb255e7e935c8dfaa918ece61f589902e59d9048892"
@@ -43,7 +43,7 @@ def test_copied_files(host):
     assert certFile.group == "root"
     assert certFile.is_file
     assert certFile.sha256sum == crtHsh
-    assert oct(certFile.mode) == "0600"
+    assert oct(certFile.mode) == "0o600"
 
     keyFile = host.file("/etc/nginx/ssl/tests/example.org/key.pem")
     keyHsh = "e696471a11dc497c458d6d1b42d82a514901d854bbd94a7f7ef4ac06be8d4c3c"
@@ -52,7 +52,7 @@ def test_copied_files(host):
     assert keyFile.group == "root"
     assert keyFile.is_file
     assert keyFile.sha256sum == keyHsh
-    assert oct(keyFile.mode) == "0600"
+    assert oct(keyFile.mode) == "0o600"
 
     sslCnf = host.file("/etc/nginx/example.org.conf")
     sslALog = "/var/log/nginx/foo-ssl-access.log example_com_access_format;"
@@ -70,7 +70,7 @@ def test_copied_files(host):
     assert certDir.user == "root"
     assert certDir.group == "root"
     assert certDir.is_directory
-    assert oct(certDir.mode) == "0700"
+    assert oct(certDir.mode) == "0o700"
 
     certFile = host.file("/etc/nginx/ssl/tests/example2.org/certificate.pem")
     assert certFile.exists
