@@ -44,6 +44,7 @@
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.cert }}"
       dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.cert }}"
       state: link
+      force: true
     notify:
       - restart nginx
     when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
@@ -53,6 +54,7 @@
       src: "{{ site.server.ssl.src_dir }}/{{ site.server.ssl.key }}"
       dest: "{{ nginx_ssl_dir }}/{{ site.server.ssl.key }}"
       state: link
+      force: true
     notify:
       - restart nginx
     when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
