@@ -1,0 +1,78 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+    - name: Copy the test ssl files
+      copy:
+        src: "{{ item }}"
+        dest: "/tmp/{{ item }}"
+      with_items:
+        - certificate.pem
+        - key.pem
+  roles:
+    - role: ansible-nginx
+      nginx_install_method: "package"
+      nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
+      nginx_install_only: true
+      nginx_access_logs:
+        - name: "example_com_access_format"
+          format: "$http_x_forwarded_for - $remote_user [$time_local] $status $body_bytes_sent $request_length"
+          options: null
+          filename: "access.log"
+      nginx_basic_auth_files:
+        - path: "/tmp/etc/nginx/.htpasswd"
+          users:
+            - username: "admin1"
+              password: "somepassword1"
+              state: "absent"
+            - username: "admin2"
+              password: "somepassword2"
+              state: "present"
+      nginx_sites:
+        - server:
+            name: foo
+            listen: 443
+            server_name: example.org
+            ssl:
+              enabled: true
+              cert: "certificate.pem"
+              key: "key.pem"
+              src_dir: "files"
+              conf: "example.org.conf"
+              access_log_format: "{{ nginx_access_logs.0.name }}"
+            location1:
+              name: "/"
+              try_files: "$uri $uri/ /index.html"
+              sendfile: "on"
+        - server:
+            name: bar
+            listen: 80
+            server_name: webmail.localhost
+            ssl:
+              enabled: false
+            location1:
+              name: /
+              try_files: "$uri $uri/ /index.html"
+              auth_basic: "Some Site"
+              auth_basic_user_file: "/etc/nginx/.htpasswd"
+            location2:
+              name: /images/
+              try_files: "$uri $uri/ /index.html"
+              proxy_set_header:
+                - Host $host
+        - server:
+            name: foobar
+            listen: 443
+            server_name: example2.org
+            ssl:
+              enabled: true
+              remote_src: true
+              create_symlink: true
+              cert: "certificate.pem"
+              key: "key.pem"
+              src_dir: "/tmp"
+              conf: "example2.org.conf"
+            location1:
+              name: "/"
+              try_files: "$uri $uri/ /index.html"
+              sendfile: "on"
