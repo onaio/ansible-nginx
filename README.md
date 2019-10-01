@@ -29,6 +29,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
 - `nginx_group` - Nginx group
 - `nginx_gid` - the gid for this group
 - `nginx_dir` - location of the Nginx configuration (conf, sites-available, sites-enabled, ...)
+- `nginx_install_only` - when set to true nginx will not be (re)started
 - `nginx_www_dir` - location of the www root for Nginx sites
 - `nginx_log_dir` - location of the Nginx logs
 - `nginx_pid` - location of the Nginx PID file
