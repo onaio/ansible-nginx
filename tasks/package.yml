@@ -17,4 +17,9 @@
   notify:
     - restart nginx
 
+- name: Nginx | Make sure the NGINX service is enabled
+  service:
+    name: nginx
+    enabled: true
+
 - include: directories.yml

@@ -3,11 +3,14 @@
 - name: start nginx
   service: name=nginx state=started enabled=yes use=service
   become: true
+  when: not nginx_install_only
 
 - name: restart nginx
   service: name=nginx state=restarted enabled=yes use=service
   become: true
+  when: not nginx_install_only
 
 - name: reload nginx
   service: name=nginx state=reloaded
   become: true
+  when: not nginx_install_only
