@@ -1,8 +1,15 @@
 ---
-- name: Make sure the passlib library is installed
+- name: Make sure the passlib library is installed for python 2
   apt:
     pkg: python-passlib
     state: present
+  when: ansible_python.version.major|int == 2
+
+- name: Make sure the passlib library is installed for python 3
+  apt:
+    pkg: python3-passlib
+    state: present
+  when: ansible_python.version.major|int == 3
 
 - include_tasks: basic-auth-file.yml
   with_items: "{{ nginx_basic_auth_files }}"
