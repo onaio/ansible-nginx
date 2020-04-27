@@ -277,6 +277,18 @@ You can then use a generate password file in your site configuration using the `
 - `nginx_realip_addresses` - Sets the addresses to use for the http_realip configuration
 - `nginx_realip_real_ip_recursive` - If recursive search is enabled, the original client address that matches one of the trusted addresses is replaced by the last non-trusted address sent in the request header field. Can be on "on" or "off". The default is "off"
 
+###### SSL Certificate passphrase
+If your SSL key file is encrypted, you can add `ssl_password_file: "{{ nginx_ssl_passphrase_path }}"` to your site where `nginx_ssl_passphrase_path` is the file to store the passwords that NGINX will look for a password to decrypt your key. You will also need to set the passphrase to add to the password file by adding `ssl_passphrase: "yourpassphrase"` to the `ssl` object in your site configuration
+
+```yml
+ssl:
+  enabled:   true
+  src_dir: "files"
+  cert: "certfile.crt"
+  key: "keyfile.key"
+  ssl_passphrase: "mypassphrase"
+```
+
 ###### naxsi module
 - `nginx_naxsi_version` - version of the naxsi module
 
