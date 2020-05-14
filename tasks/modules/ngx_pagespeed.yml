@@ -1,6 +1,6 @@
 ---
 # file: nginx/tasks/modules/ngx_pagespeed.yml
-# configure flag: --add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta
+# configure flag: --add-module=/tmp/incubator-pagespeed-ngx-release-{{nginx_ngx_pagespeed_version}}-beta
 
 - name: Nginx | Modules | Make sure the dependences are installed
   apt:
@@ -12,22 +12,22 @@
 
 - name: Nginx | Modules | Download the ngx_pagespeed source
   get_url:
-    url: "https://github.com/pagespeed/ngx_pagespeed/archive/release-{{nginx_ngx_pagespeed_version}}-beta.tar.gz"
-    dest: "/tmp/ngx_pagespeed_module.tar.gz"
+    url: "https://github.com/apache/incubator-pagespeed-ngx/archive/release-{{nginx_ngx_pagespeed_version}}-beta.tar.gz"
+    dest: "/tmp/incubator-pagespeed-ngx_module.tar.gz"
 
 - name: Nginx | Modules | Unpack the ngx_pagespeed source
-  command: tar -xvzf /tmp/ngx_pagespeed_module.tar.gz
+  command: tar -xvzf /tmp/incubator-pagespeed-ngx_module.tar.gz
   args:
     chdir: /tmp
-    creates: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
+    creates: "/tmp/incubator-pagespeed-ngx-release-{{nginx_ngx_pagespeed_version}}-beta"
 
 - name: Nginx | Modules | Download the psol source
   get_url:
     url: "https://dl.google.com/dl/page-speed/psol/{{nginx_ngx_pagespeed_version}}.tar.gz"
-    dest: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
+    dest: "/tmp/incubator-pagespeed-ngx-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
 
 - name: Nginx | Modules | Unpack the psol source
-  command: "tar -xvzf /tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
+  command: "tar -xvzf /tmp/incubator-pagespeed-ngx-release-{{nginx_ngx_pagespeed_version}}-beta/psol.tar.gz"
   args:
     chdir: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
-    creates: "/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta/psol"
+    creates: "/tmp/incubator-pagespeed-ngx-release-{{nginx_ngx_pagespeed_version}}-beta/psol"
