@@ -10,15 +10,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image:
+        scenario:
           - ubuntu
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
-      - name: molecule
-        uses: robertdebock/molecule-action@1.2.8
+      - name: Run Molecule tests
+        uses: onaio/molecule-action@master
         with:
-          image: "${{ matrix.image }}"
-          options: parallel
+          molecule_args: --all
