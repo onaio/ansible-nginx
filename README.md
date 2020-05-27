@@ -1,4 +1,4 @@
-## onaio - nginx [![Build Status](https://travis-ci.org/onaio/ansible-nginx.svg?branch=master)](https://travis-ci.org/onaio/ansible-nginx)
+## onaio - nginx ![](https://github.com/onaio/ansible-nginx/workflows/CI/badge.svg?master)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
