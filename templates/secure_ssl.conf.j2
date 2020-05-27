@@ -6,6 +6,9 @@ error_log     {{ nginx_log_dir }}/{{ site.server.name }}-ssl-error.log;
 ssl_certificate           {{ nginx_ssl_dir }}/{{ site.server.ssl.cert }};
 ssl_certificate_key       {{ nginx_ssl_dir }}/{{ site.server.ssl.key }};
 ssl_trusted_certificate   {{ nginx_ssl_dir }}/{{ site.server.ssl.cert }};
+{% if site.ssl.ssl_passphrase is defined %}
+ssl_password_file         {{ nginx_ssl_passphrase_path }}
+{% endif %}
 
 # SSL opts
 {% if site.server.ssl.add_ssl_directive is not defined or site.server.ssl.add_ssl_directive %}
