@@ -1,10 +1,14 @@
 ---
 dependency:
   name: galaxy
+  options:
+    ignore-certs: True
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  flake8
 platforms:
   - name: ubuntu-16.04
     image: solita/ubuntu-systemd:16.04
@@ -17,7 +21,18 @@ provisioner:
     enabled: false
 scenario:
   name: default
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
 verifier:
   name: testinfra
-  lint:
-    name: flake8
