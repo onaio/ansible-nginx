@@ -1,4 +1,4 @@
-## onaio - nginx ![](https://github.com/onaio/ansible-nginx/workflows/CI/badge.svg?master)
+## onaio - nginx [![CI](https://github.com/onaio/ansible-nginx/workflows/CI/badge.svg)](https://github.com/onaio/ansible-nginx/actions?query=workflow%3ACI)
 
 Ansible role which installs and configures Nginx, from a package or from source (including a series of optional modules).
 
