@@ -59,6 +59,15 @@
       - restart nginx
     when: site.server.ssl.create_symlink is defined and site.server.ssl.create_symlink == true
 
+  - name: Add certificate passphrase to SSL passphrases file
+    lineinfile:
+      path: "{{ nginx_ssl_passphrase_path }}"
+      line: "{{ site.server.ssl.ssl_passphrase }}"
+      create: true
+    notify:
+      - restart nginx
+    when: site.server.ssl.ssl_passphrase is defined
+
   - name: Generate secure Diffie Hellman ephemeral parameters
     command: openssl dhparam -dsaparam -out /etc/ssl/certs/dhparam.pem 4096 creates=/etc/ssl/certs/dhparam.pem
   when: site.server.ssl.enabled == True
