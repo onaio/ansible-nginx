@@ -9,6 +9,7 @@
 - name: Nginx | Add the nginx repository
   apt_repository:
     repo: ppa:nginx/stable
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version is version_compare('20.04', '<')
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:
