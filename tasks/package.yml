@@ -8,7 +8,8 @@
 
 - name: Nginx | Add the nginx repository
   apt_repository:
-    repo: ppa:nginx/stable
+    repo: "{{ nginx_apt_ppa }}"
+  when: nginx_apt_ppa | length > 0
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:

@@ -5,6 +5,7 @@ nginx_install_method: "source"
 nginx_source_version: "1.8.0"
 nginx: "nginx"
 nginx_install_only: false
+nginx_apt_ppa: "ppa:nginx/stable"
 
 nginx_user: www-data
 nginx_group: www-data
