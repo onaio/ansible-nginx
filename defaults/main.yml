@@ -200,3 +200,12 @@ nginx_enable_monitoring: true
 
 # Basic authentication
 nginx_basic_auth_files: []
+
+# ANXS.apt installed packages
+nginx_apt_default_packages:
+  - python-apt-common
+  - unattended-upgrades
+  - apt-transport-https
+  - curl
+  - ca-certificates
+  - software-properties-common
