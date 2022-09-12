@@ -10,7 +10,9 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - all
+        - focal
+        - bionic
+        - jammy
   categories:
     - system
 
@@ -18,6 +20,8 @@ dependencies:
   - role: ANXS.hostname
     when: nginx_set_hostname == True
   - role: ANXS.apt
+    vars:
+      apt_default_packages: "{{ nginx_apt_default_packages }}"
   - role: ANXS.build-essential
     when: nginx_install_method is defined and nginx_install_method == "source"
   - role: ANXS.perl
