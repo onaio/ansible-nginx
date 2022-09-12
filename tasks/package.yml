@@ -6,12 +6,15 @@
     name:
       - python3-pycurl
       - dirmngr
+      - gnupg
     state: present
 
 - name: Nginx | Add the nginx repository
   apt_repository:
     repo: "{{ nginx_apt_ppa }}"
-  when: nginx_apt_ppa | length > 0
+  when:
+    - nginx_apt_ppa | length > 0
+    - ansible_distribution_version is version("22.04", "<")
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:
