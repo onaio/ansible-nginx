@@ -3,7 +3,9 @@
 
 - name: Nginx | Make sure the ansible required dependencies are installed
   apt:
-    pkg: python3-pycurl
+    name:
+      - python3-pycurl
+      - dirmngr
     state: present
 
 - name: Nginx | Add the nginx repository
