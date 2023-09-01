@@ -15,13 +15,23 @@ galaxy_info:
         - jammy
   categories:
     - system
+  role_name: nginx
+  namespace: onaio
 
 dependencies:
   - role: ANXS.hostname
     when: nginx_set_hostname == True
-  - role: ANXS.apt
-    vars:
-      apt_default_packages: "{{ nginx_apt_default_packages }}"
+  # - role: ANXS.apt
+  #   vars:
+  #     apt_install_suggests: yes
+  #     apt_autoremove_recommends: yes 
+  #     apt_default_packages:
+  #         - python-apt-common
+  #         - unattended-upgrades
+  #         - apt-transport-https
+  #         - curl
+  #         - ca-certificates
+  #         - software-properties-common
   - role: ANXS.build-essential
     when: nginx_install_method is defined and nginx_install_method == "source"
   - role: ANXS.perl
