@@ -1,7 +1,17 @@
-server {
+{% if item.server.backends is defined %}
+{% for k, v in item.server.backends.items() %}
+upstream {{ k }} {
+  least_conn;
+{% for lv in v %}
+  server {{ lv }}
+{% endfor %}
+}
+{% endfor %}
+{% endif %}
 
+server {
 {% for k,v in item.server.items() %}
-{% if k.find('location') == -1 and k != 'name' and k != 'ssl' %}
+{% if k.find('location') == -1 and k != 'name' and k != 'ssl' and k != 'backends' %}
 {% if v is not string and v is iterable %}
 {% for lv in v %}
   {{ k|replace('__', '') }} {{ lv }}{% if k.find('__') == -1 %};
@@ -19,7 +29,7 @@ server {
 
 {% for k,v in item.server.items() if k.find('location') != -1 %}
   location {{ v.name }} {
-{% for x,y in v.items() if x != 'name' %}
+{% for x,y in v.items() if x != 'name' and k != 'backends' %}
 {% if y is not string and y is iterable %}
 {% for ly in y %}
     {{ x|replace('__', '') }} {{ ly }}{% if x.find('__') == -1 %};
