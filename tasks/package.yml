@@ -9,12 +9,18 @@
       - gnupg
     state: present
 
-- name: Nginx | Add the nginx repository
+#  make the KEY_ID a var
+- name: Add nginx GPG key
+  command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+
+- name: Add Nginx APT repository
   apt_repository:
-    repo: "{{ nginx_apt_ppa }}"
-  when:
-    - nginx_apt_ppa | length > 0
-    - ansible_distribution_version is version("22.04", "<")
+    repo: "deb https://nginx.org/packages/ubuntu/ {{ ubuntu_release }} nginx"
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:
