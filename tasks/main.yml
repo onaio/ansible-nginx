@@ -1,6 +1,7 @@
 ---
 # file: nginx/tasks/main.yml
-
+- debug:
+    var: nginx_install_method
 - include: package.yml
   when: nginx_install_method == "package"
 - include: source.yml
