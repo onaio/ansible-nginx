@@ -75,3 +75,15 @@
               name: "/"
               try_files: "$uri $uri/ /index.html"
               sendfile: "on"
+      nginx_streams:
+        - stream:
+            name: "some_tcp_server"
+            listen: "10000"
+            proxy_socket_keepalive: "on"
+            proxy_pass: "localhost:10001"
+        - stream:
+            name: "some_udp_server"
+            listen: "53 udp reuseport"
+            proxy_timeout: "20s"
+            proxy_pass: "localhost:53"
+            

@@ -64,6 +64,9 @@ def test_copied_files(host):
                  " $request_length;")
     assert aLogLn in ngxCnf.content_string
 
+    includeStreamsLn = "include /etc/nginx/stream.d/*.conf;"
+    assert includeStreamsLn in ngxCnf.content_string
+
     # second ssl site
     certDir = host.file("/etc/nginx/ssl/tests/example2.org")
     assert certDir.exists
@@ -83,6 +86,23 @@ def test_copied_files(host):
     assert keyFile.user == "root"
     assert keyFile.group == "root"
     assert keyFile.is_symlink
+
+    # streams
+    ngxCnf = host.file("/etc/nginx/nginx.conf")
+    includeStreamsLn = "include /etc/nginx/stream.d/*.conf;"
+    assert includeStreamsLn in ngxCnf.content_string
+
+    tcpStreamCnf = host.file("/etc/nginx/stream.d/some_tcp_server.conf")
+    assert tcpStreamCnf.exists
+
+    proxyPassLn = "proxy_pass localhost:10001;"
+    assert proxyPassLn in tcpStreamCnf.content_string
+
+    udpStreamCnf = host.file("/etc/nginx/stream.d/some_udp_server.conf")
+    assert udpStreamCnf.exists
+
+    listenLn = "listen 53 udp reuseport;"
+    assert listenLn in udpStreamCnf.content_string
 
 
 def test_basic_auth_files(host):

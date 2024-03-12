@@ -17,6 +17,12 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
+    port_bindings:
+      - 80: 80
+      - 443: 443
+    published_ports:
+      - 10000/tcp
+      - 53/udp
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
@@ -27,6 +33,11 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
+    published_ports:
+      - 443/tcp
+      - 80/tcp
+      - 10000/tcp
+      - 53/udp
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
@@ -37,6 +48,11 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
     cgroupns_mode: host
+    published_ports:
+      - 443/tcp
+      - 80/tcp
+      - 10000/tcp
+      - 53/udp
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
