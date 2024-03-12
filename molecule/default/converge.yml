@@ -80,7 +80,7 @@
             name: "some_tcp_server"
             listen: "10000"
             proxy_socket_keepalive: "on"
-            proxy_pass: "localhost:10001"
+            proxy_pass: "localhost:10000"
         - stream:
             name: "some_udp_server"
             listen: "53 udp reuseport"
