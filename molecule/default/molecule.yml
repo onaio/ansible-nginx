@@ -15,8 +15,7 @@ platforms:
     privileged: true
     command: /sbin/init
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     published_ports:
       - 80/tcp
       - 443/tcp
@@ -30,8 +29,7 @@ platforms:
     privileged: true
     command: /sbin/init
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     published_ports:
       - 80/tcp
       - 443/tcp
@@ -45,8 +43,7 @@ platforms:
     privileged: true
     command: /sbin/init
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     published_ports:
       - 80/tcp
       - 443/tcp
