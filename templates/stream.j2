@@ -1,0 +1,7 @@
+server {
+{% for k,v in item.stream.items() %}
+{% if k != 'name' %}
+    {{ k }} {{ v }};
+{% endif %}
+{% endfor %}
+}

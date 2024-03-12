@@ -78,6 +78,7 @@ Currently it's been developed for, and tested on Ubuntu. It is assumed to work o
             filename: "access.log"
 - `nginx_default_root` - the directory to place the default site
 - `nginx_default_enable` - whether or not to actually enable the defaul site
+- `nginx_lib_modules_dir` - the directory containing the nginx modules
 
 ##### source
 - `nginx_source_version` - the version of Nginx to install
@@ -107,6 +108,7 @@ nginx_source_modules_included:
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
   http_geoip_module: "--with-http_geoip_module"
+  ngx_stream_core_module: "--with-stream"
 ```
 
 ##### Sites
@@ -187,6 +189,53 @@ nginx_enabled_sites:
 ```yml
 nginx_disabled_sites:
   - webmail.localhost
+```
+
+##### Streams
+
+There is a possibility to configure a list of streams (TCP/UDP) to be proxied as well. Just provide a list of dictionaries according to the following format:
+
+```yml
+nginx_streams:
+  - stream:
+      name: "some_tcp_server"
+      listen: "10000"
+      proxy_socket_keepalive: "on"
+      proxy_pass: "localhost:10001"
+  - stream:
+      name: "some_udp_server"
+      listen: "53 udp reuseport"
+      proxy_timeout: "20s"
+      proxy_pass: "dns.example.com:53"
+```
+
+A stream block will be added to the `/etc/nginx/nginx.conf` file. A `/etc/nginx/stream.d/` directory will be created and a file for each stream will be created in this directory. The file will be named after the stream name and will have a `.conf` extension. All provided options will be added to the stream block in the file apart from the `name` option which will be used to name the file.
+
+
+```yml
+# /etc/nginx/nginx.conf
+# ... other nginx configuration
+stream {
+  include /etc/nginx/stream.d/*.conf;
+}
+```
+
+```conf
+# /etc/nginx/stream.d/some_tcp_server.conf
+server {
+  listen 10000;
+  proxy_socket_keepalive on;
+  proxy_pass localhost:10001;
+}
+```
+
+```conf
+# /etc/nginx/stream.d/some_udp_server.conf
+server {
+  listen 53 udp reuseport;
+  proxy_timeout 20s;
+  proxy_pass dns.example
+}
 ```
 
 ##### Load Balancers

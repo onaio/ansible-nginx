@@ -55,6 +55,7 @@ nginx_access_logs:
     format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'
     options: null
     filename: "access.log"
+nginx_lib_modules_dir: "/usr/lib/nginx/modules"
 
 # default site
 nginx_default_root: "{{nginx_www_dir}}/default"
@@ -65,6 +66,9 @@ nginx_sites: []
 nginx_loadbalancers: []
 nginx_enabled_sites: []
 nginx_disabled_sites: []
+
+# stream inventory
+nginx_streams: []
 
 # source
 nginx_source_url: "http://nginx.org/download/nginx-{{nginx_source_version}}.tar.gz"
@@ -90,6 +94,7 @@ nginx_source_modules_included:
   naxsi_module: "--add-module=/tmp/naxsi-{{nginx_naxsi_version}}/naxsi_src"
   ngx_pagespeed: "--add-module=/tmp/ngx_pagespeed-release-{{nginx_ngx_pagespeed_version}}-beta"
   http_geoip_module: "--with-http_geoip_module"
+  ngx_stream_core_module: "--with-stream"
 
 nginx_source_modules_excluded:
   - mail_pop3_module

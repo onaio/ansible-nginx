@@ -25,3 +25,12 @@
     mode: 0755
     state: directory
   with_items: ["sites-available", "sites-enabled", "conf.d"]
+
+- name: Nginx | Make sure the stream.d directory exists
+  file:
+    path: "{{nginx_dir}}/stream.d"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+  when: nginx_streams|lower != 'none'

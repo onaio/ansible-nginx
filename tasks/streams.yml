@@ -1,0 +1,9 @@
+---
+- name: Nginx | Update the configurations for the streams inventory
+  template:
+    src: stream.j2
+    dest: "{{nginx_dir}}/stream.d/{{item.stream.name}}.conf"
+  with_items: "{{nginx_streams}}"
+  when: nginx_streams|lower != 'none'
+  notify:
+    - reload nginx

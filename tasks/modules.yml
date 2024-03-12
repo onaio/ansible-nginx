@@ -42,3 +42,6 @@
 
 - include: modules/http_geoip_module.yml
   when: nginx_source_modules_included.http_geoip_module is defined
+
+- include: modules/ngx_stream_core_module.yml
+  when: nginx_source_modules_included.ngx_stream_core_module is defined

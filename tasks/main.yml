@@ -9,6 +9,7 @@
 - include: configure.yml
 - include: default_site.yml
 - include: sites.yml
+- include: streams.yml
 - include: loadbalancers.yml
 - include: basic-auth.yml
   when: nginx_basic_auth_files|length > 0

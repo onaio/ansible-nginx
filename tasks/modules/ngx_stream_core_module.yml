@@ -1,0 +1,4 @@
+# file: roles/nginx/tasks/modules/ngx_stream_core_module.yml
+# configure flag: --with-stream
+
+# no contents

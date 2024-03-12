@@ -10,6 +10,10 @@ worker_rlimit_nofile {{nginx_worker_rlimit_nofile}};
 error_log  {{nginx_log_dir}}/{{nginx_error_log_filename}}{% if nginx_error_log_options %} {{nginx_error_log_options}}{% endif %};
 pid        {{nginx_pid}};
 
+{% if nginx_streams|lower != 'none' %}
+load_module {{nginx_lib_modules_dir}}/ngx_stream_module.so;
+{% endif %}
+
 events {
   worker_connections  {{nginx_worker_connections}};
 {% if nginx_multi_accept %}
@@ -105,3 +109,9 @@ http {
   include {{nginx_dir}}/conf.d/*.conf;
   include {{nginx_dir}}/sites-enabled/*;
 }
+
+{% if nginx_streams|lower != 'none' %}
+stream {
+  include {{nginx_dir}}/stream.d/*.conf;
+}
+{% endif %}
