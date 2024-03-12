@@ -13,9 +13,11 @@ platforms:
   - name: nginx-ubuntu-18.04
     image: geerlingguy/docker-ubuntu1804-ansible:latest
     privileged: true
-    command: /sbin/init
+    command: ""
+    cgroupns_mode: host
+    pre_build_image: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     published_ports:
       - 80/tcp
       - 443/tcp
@@ -27,9 +29,11 @@ platforms:
   - name: nginx-ubuntu-20.04
     image: geerlingguy/docker-ubuntu2004-ansible:latest
     privileged: true
-    command: /sbin/init
+    command: ""
+    cgroupns_mode: host
+    pre_build_image: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     published_ports:
       - 80/tcp
       - 443/tcp
@@ -41,9 +45,11 @@ platforms:
   - name: nginx-ubuntu-22.04
     image: geerlingguy/docker-ubuntu2204-ansible:latest
     privileged: true
-    command: /sbin/init
+    command: ""
+    cgroupns_mode: host
+    pre_build_image: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     published_ports:
       - 80/tcp
       - 443/tcp
