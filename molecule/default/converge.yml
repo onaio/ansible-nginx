@@ -86,4 +86,3 @@
             listen: "53 udp reuseport"
             proxy_timeout: "20s"
             proxy_pass: "localhost:53"
-            
