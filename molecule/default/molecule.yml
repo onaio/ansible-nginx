@@ -13,7 +13,7 @@ platforms:
   - name: nginx-ubuntu-18.04
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1804}-ansible:latest"
     privileged: true
-    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    command: ${MOLECULE_DOCKER_COMMAND:-"/lib/systemd/systemd"}
     cgroupns_mode: host
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
@@ -23,7 +23,7 @@ platforms:
   - name: nginx-ubuntu-20.04
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     privileged: true
-    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    command: ${MOLECULE_DOCKER_COMMAND:-"/lib/systemd/systemd"}
     cgroupns_mode: host
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
@@ -33,7 +33,7 @@ platforms:
   - name: nginx-ubuntu-22.04
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest"
     privileged: true
-    command: ${MOLECULE_DOCKER_COMMAND:-"/usr/sbin/init"}
+    command: ${MOLECULE_DOCKER_COMMAND:-"/lib/systemd/systemd"}
     cgroupns_mode: host
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
