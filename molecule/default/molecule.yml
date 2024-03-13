@@ -50,7 +50,7 @@ platforms:
     image: geerlingguy/docker-ubuntu2204-ansible:latest
     privileged: true
     pre_build_image: true
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    command: ""
     cgroupns_mode: host
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
@@ -64,6 +64,8 @@ platforms:
       LANG: "C.UTF-8"
       ANSIBLE_LOCAL_TEMP: "${WORKSPACE:-$HOME}/.ansible/tmp"
       ANSIBLE_REMOTE_TMP: /tmp
+    tmpfs:
+      - /tmp
 provisioner:
   name: ansible
   lint:
