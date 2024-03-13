@@ -5,7 +5,7 @@ galaxy_info:
   author: Ona Engineering, pjan vandaele
   company: Ona Systems Inc, ANXS
   namespace: onaio
-  role_name: nginx
+  role_name: ansible-nginx
   description: Install and configure Nginx
   min_ansible_version: "1.9"
   license: MIT

@@ -10,7 +10,7 @@
         - certificate.pem
         - key.pem
   roles:
-    - role: nginx
+    - role: ansible-nginx
       nginx_install_method: "package"
       nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
       nginx_install_only: true
