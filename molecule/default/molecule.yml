@@ -17,7 +17,7 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     cgroupns_mode: host
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /sys:/sys:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
@@ -28,7 +28,7 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     cgroupns_mode: host
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /sys:/sys:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
@@ -39,7 +39,7 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     cgroupns_mode: host
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /sys:/sys:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
