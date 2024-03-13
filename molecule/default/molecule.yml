@@ -80,4 +80,3 @@ scenario:
     - destroy
 verifier:
   name: testinfra
-

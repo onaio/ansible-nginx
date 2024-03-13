@@ -95,7 +95,7 @@ def test_copied_files(host):
     tcpStreamCnf = host.file("/etc/nginx/stream.d/some_tcp_server.conf")
     assert tcpStreamCnf.exists
 
-    proxyPassLn = "proxy_pass localhost:10001;"
+    proxyPassLn = "proxy_pass localhost:10000;"
     assert proxyPassLn in tcpStreamCnf.content_string
 
     udpStreamCnf = host.file("/etc/nginx/stream.d/some_udp_server.conf")
