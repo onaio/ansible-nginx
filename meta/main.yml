@@ -4,8 +4,10 @@
 galaxy_info:
   author: Ona Engineering, pjan vandaele
   company: Ona Systems Inc, ANXS
+  namespace: onaio
+  role_name: nginx
   description: Install and configure Nginx
-  min_ansible_version: 1.9
+  min_ansible_version: "1.9"
   license: MIT
   platforms:
     - name: Ubuntu
@@ -13,8 +15,6 @@ galaxy_info:
         - focal
         - bionic
         - jammy
-  categories:
-    - system
 
 dependencies:
   - role: ANXS.hostname
