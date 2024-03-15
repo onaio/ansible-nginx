@@ -11,35 +11,29 @@ lint: |
   flake8
 platforms:
   - name: nginx-ubuntu-18.04
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1804}-ansible:latest"
+    image: geerlingguy/docker-ubuntu1804-ansible:latest
     privileged: true
-    pre_build_image: true
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    cgroupns_mode: host
+    command: /sbin/init
     volumes:
-      - /sys:/sys:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
   - name: nginx-ubuntu-20.04
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
+    image: geerlingguy/docker-ubuntu2004-ansible:latest
     privileged: true
-    pre_build_image: true
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    cgroupns_mode: host
+    command: /sbin/init
     volumes:
-      - /sys:/sys:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
   - name: nginx-ubuntu-22.04
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest"
+    image: geerlingguy/docker-ubuntu2204-ansible:latest
     privileged: true
-    pre_build_image: true
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    cgroupns_mode: host
+    command: /sbin/init
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     env:
       LC_ALL: "C.UTF-8"
       LANG: "C.UTF-8"
