@@ -22,6 +22,13 @@
   apt:
     update_cache: yes
 
+- name: Nginx | Modules | Unarchive GeoLiteCity files
+  shell: wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1\~18.04.23_amd64.deb -P /tmp/
+
+- name: Install deb
+  command: apt install /tmp/libssl1.1_1.1.1-1ubuntu2.1~18.04.23_amd64.deb -y --allow-downgrades
+  become: true
+
 - name: Nginx | Make sure nginx is installed (package)
   apt:
     pkg: "{{nginx}}"

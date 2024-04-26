@@ -13,6 +13,7 @@
     - libpcre3
     - libpcre3-dev
     - libssl-dev
+    - libssl1.1
 
 - name: Nginx | Download the Nginx source release if not yet present
   get_url:
