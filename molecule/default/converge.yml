@@ -11,7 +11,6 @@
         - key.pem
   roles:
     - role: ansible-nginx
-      nginx_install_method: "package"
       nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
       nginx_access_logs:
         - name: "example_com_access_format"

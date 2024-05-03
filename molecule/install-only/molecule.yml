@@ -11,6 +11,8 @@ platforms:
   - name: ubuntu-16.04
     image: solita/ubuntu-systemd:16.04
     privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
     command: /sbin/init
 provisioner:
   name: ansible

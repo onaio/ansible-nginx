@@ -14,11 +14,11 @@
   when: nginx_source_modules_included.http_geoip_module is defined
 
 - name: Nginx | Modules | Download GeoIP database files
-  get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz dest={{nginx_dir}}/geoip/GeoIP.dat.gz
+  get_url: url=https://centminmod.com/centminmodparts/geoip-legacy/GeoIP.dat.gz dest={{nginx_dir}}/geoip/GeoIP.dat.gz
   when: nginx_source_modules_included.http_geoip_module is defined
 
 - name: Nginx | Modules | Download GeoLiteCity database files
-  get_url: url=http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
+  get_url: url=https://dl.miyuru.lk/geoip/maxmind/city/maxmind.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
   when: nginx_source_modules_included.http_geoip_module is defined
 
 - name: Nginx | Modules | Check if the GeoIP file exists

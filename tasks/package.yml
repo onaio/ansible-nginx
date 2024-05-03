@@ -1,5 +1,7 @@
 ---
-# file: nginx/tasks/package.yml
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
 
 - name: Nginx | Make sure the ansible required dependencies are installed
   apt:
@@ -7,9 +9,9 @@
       - python3-pycurl
       - dirmngr
       - gnupg
+      - wget
     state: present
 
-#  make the KEY_ID a var
 - name: Add nginx GPG key
   command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
 
