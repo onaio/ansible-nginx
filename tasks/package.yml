@@ -43,4 +43,4 @@
     name: nginx
     enabled: true
 
-- include: directories.yml
+- include_tasks: directories.yml

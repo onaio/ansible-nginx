@@ -1,19 +1,17 @@
 ---
 # file: nginx/tasks/main.yml
-- debug:
-    var: nginx_install_method
-- include: package.yml
+- include_tasks: package.yml
   when: nginx_install_method == "package"
-- include: source.yml
+- include_tasks: source.yml
   when: nginx_install_method == "source"
-- include: scripts.yml
-- include: configure.yml
-- include: default_site.yml
-- include: sites.yml
-- include: loadbalancers.yml
-- include: basic-auth.yml
+- include_tasks: scripts.yml
+- include_tasks: configure.yml
+- include_tasks: default_site.yml
+- include_tasks: sites.yml
+- include_tasks: loadbalancers.yml
+- include_tasks: basic-auth.yml
   when: nginx_basic_auth_files|length > 0
-- include: monit.yml
+- include_tasks: monit.yml
   when: monit_protection is defined and monit_protection == true
-- include: monitoring.yml
+- include_tasks: monitoring.yml
   when: nginx_enable_monitoring is defined and nginx_enable_monitoring == true

@@ -1,8 +1,8 @@
 ---
 # file: nginx/tasks/source.yml
 
-- include: user.yml
-- include: directories.yml
+- include_tasks: user.yml
+- include_tasks: directories.yml
 
 - name: Nginx | Make sure the Nginx build dependencies are installed
   apt:
@@ -21,7 +21,7 @@
     url: "{{nginx_source_url}}"
     dest: "/tmp/nginx-{{nginx_source_version}}.tar.gz"
 
-- include: "modules.yml"
+- include_tasks: "modules.yml"
 
 - name: Nginx | Unpack the compressed Nginx source
   command: tar -xvzf /tmp/nginx-{{nginx_source_version}}.tar.gz
