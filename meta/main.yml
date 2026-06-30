@@ -12,9 +12,9 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - focal
-        - bionic
         - jammy
+        - noble
+        - resolute
 
 dependencies:
   - role: ANXS.hostname

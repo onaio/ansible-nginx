@@ -4,9 +4,6 @@
 - include_tasks: modules/http_stub_status_module.yml
   when: nginx_source_modules_included.http_stub_status_module is defined
 
-- include_tasks: modules/http_ssl_module.yml
-  when: nginx_source_modules_included.http_ssl_module is defined
-
 - include_tasks: modules/http_gzip_static_module.yml
   when: nginx_source_modules_included.http_gzip_static_module is defined
 

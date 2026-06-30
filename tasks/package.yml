@@ -12,26 +12,26 @@
       - wget
     state: present
 
-- name: Add nginx GPG key
-  command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+- name: Nginx | Ensure the apt keyrings directory exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Nginx | Add the nginx.org signing key
+  get_url:
+    url: https://nginx.org/keys/nginx_signing.key
+    dest: /etc/apt/keyrings/nginx.asc
+    mode: "0644"
 
 - name: Add Nginx APT repository
   apt_repository:
-    repo: "deb https://nginx.org/packages/ubuntu/ {{ ubuntu_release }} nginx"
+    repo: "deb [signed-by=/etc/apt/keyrings/nginx.asc] https://nginx.org/packages/ubuntu/ {{ ubuntu_release }} nginx"
     state: present
 
 - name: Update apt cache
   apt:
     update_cache: yes
-
-- name: Nginx | Download the libssl1.1 package
-  get_url:
-    url: "http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.23_amd64.deb"
-    dest: "/tmp/libssl1.1_1.1.1-1ubuntu2.1~18.04.23_amd64.deb"
-
-- name: Install deb
-  command: apt install /tmp/libssl1.1_1.1.1-1ubuntu2.1~18.04.23_amd64.deb -y --allow-downgrades
-  become: true
 
 - name: Nginx | Make sure nginx is installed (package)
   apt:
