@@ -8,9 +8,9 @@ nginx: "nginx"
 ubuntu_release: "{{ ansible_distribution_release }}"
 nginx_install_only: false
 
-# Install the uwsgi_params file (only needed when serving a uWSGI app, e.g.
-# sites that use uwsgi_pass). Disabled by default.
-nginx_uwsgi_app: false
+# Install the uwsgi_params file (needed when serving a uWSGI app, e.g. sites
+# that use uwsgi_pass). Enabled by default; set to false to skip it.
+nginx_uwsgi_app: true
 
 nginx_user: www-data
 nginx_group: www-data
