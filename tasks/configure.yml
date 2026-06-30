@@ -18,6 +18,7 @@
     mode: 0644
   notify:
     - restart nginx
+  when: nginx_uwsgi_app | bool
 
 - name: Nginx | Check for existence of Nginx configuration
   stat:
