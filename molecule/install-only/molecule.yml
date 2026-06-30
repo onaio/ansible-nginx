@@ -33,6 +33,8 @@ provisioner:
   config_options:
     defaults:
       remote_tmp: /tmp/.ansible/tmp
+  env:
+    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/..:${HOME}/.ansible/roles"
 scenario:
   name: install-only
   test_sequence:
