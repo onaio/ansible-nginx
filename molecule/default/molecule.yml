@@ -5,10 +5,6 @@ dependency:
     ignore-certs: True
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  flake8
 platforms:
   - name: nginx-ubuntu-22.04
     image: geerlingguy/docker-ubuntu2204-ansible:latest
@@ -48,14 +44,10 @@ provisioner:
   config_options:
     defaults:
       remote_tmp: /tmp/.ansible/tmp
-  lint:
-    name: ansible-lint
-    enabled: false
 scenario:
   name: default
   test_sequence:
     - dependency
-    - lint
     - cleanup
     - destroy
     - syntax
