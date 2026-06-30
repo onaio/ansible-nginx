@@ -81,7 +81,7 @@ nginx_source_modules_included:
   http_gzip_static_module: "--with-http_gzip_static_module"
   upload_progress_module: "--add-module=/tmp/nginx-upload-progress-module-{{nginx_upload_progress_version}}"
   headers_more_module: "--add-module=/tmp/headers-more-nginx-module-{{nginx_headers_more_version}}"
-  http_auth_request_module: "--add-module=/tmp/ngx_http_auth_request_module-{{nginx_auth_request_release}}"
+  http_auth_request_module: "--with-http_auth_request_module"
   http_echo_module: "--add-module=/tmp/echo-nginx-module-{{nginx_echo_version}}"
   google_perftools_module: "--with-google_perftools_module"
   ipv6_module: "--with-ipv6"
@@ -152,9 +152,9 @@ nginx_headers_more_version: "0.26"
 nginx_headers_more_url: "https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v{{nginx_headers_more_version}}.tar.gz"
 
 
-# http_auth_request_module configuration
-nginx_auth_request_release: "662785733552"
-nginx_auth_request_url: "http://mdounin.ru/hg/ngx_http_auth_request_module/archive/{{nginx_auth_request_release}}.tar.gz"
+# http_auth_request_module is built into nginx core (since 1.5.4) and is
+# enabled via the --with-http_auth_request_module configure flag above; no
+# external source download is required.
 
 
 # http_echo_module configuration
