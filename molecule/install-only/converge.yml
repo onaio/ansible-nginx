@@ -11,6 +11,7 @@
         - key.pem
   roles:
     - role: ansible-nginx
+      nginx_uwsgi_app: true
       nginx_ssl_dir: "{{ nginx_dir }}/ssl/tests/{{ site.server.server_name }}"
       nginx_install_only: true
       nginx_access_logs:

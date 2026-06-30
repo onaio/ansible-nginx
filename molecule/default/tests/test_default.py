@@ -90,3 +90,9 @@ def test_basic_auth_files(host):
     assert pwFile.exists
     assert pwFile.user == "www-data"
     assert pwFile.group == "www-data"
+
+
+def test_uwsgi_params(host):
+    uwsgi = host.file("/etc/nginx/uwsgi_params")
+    assert uwsgi.exists
+    assert uwsgi.is_file
