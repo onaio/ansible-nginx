@@ -3,23 +3,31 @@
 # configure flag: --with-http_geoip_module
 
 - name: Nginx | Modules | Install GeoIp lib
-  apt: pkg={{ item }} state=latest
-  with_items:
-    - libgeoip1
-    - libgeoip-dev
+  apt:
+    name:
+      - libgeoip1
+      - libgeoip-dev
+    state: latest
   when: nginx_source_modules_included.http_geoip_module is defined
 
 - name: Nginx | Modules | Create directory inside nginx
   file: path={{nginx_dir}}/geoip state=directory
   when: nginx_source_modules_included.http_geoip_module is defined
 
+# The legacy GeoIP databases are only needed at runtime when GeoIP lookups are
+# enabled (nginx_geoip). Fetching them otherwise pulls large, deprecated files
+# from unreliable third-party hosts, so only download them when geoip is on.
 - name: Nginx | Modules | Download GeoIP database files
   get_url: url=https://centminmod.com/centminmodparts/geoip-legacy/GeoIP.dat.gz dest={{nginx_dir}}/geoip/GeoIP.dat.gz
-  when: nginx_source_modules_included.http_geoip_module is defined
+  when:
+    - nginx_source_modules_included.http_geoip_module is defined
+    - nginx_geoip != 'off'
 
 - name: Nginx | Modules | Download GeoLiteCity database files
   get_url: url=https://dl.miyuru.lk/geoip/maxmind/city/maxmind.dat.gz dest={{nginx_dir}}/geoip/GeoLiteCity.dat.gz
-  when: nginx_source_modules_included.http_geoip_module is defined
+  when:
+    - nginx_source_modules_included.http_geoip_module is defined
+    - nginx_geoip != 'off'
 
 - name: Nginx | Modules | Check if the GeoIP file exists
   stat: path={{nginx_dir}}/geoip/GeoIP.dat
@@ -27,7 +35,9 @@
 
 - name: Nginx | Modules | Unarchive GeoIP files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoIP.dat.gz > {{nginx_dir}}/geoip/GeoIP.dat
-  when: not geoip_file.stat.exists
+  when:
+    - nginx_geoip != 'off'
+    - not geoip_file.stat.exists
 
 - name: Nginx | Modules | Check if the GeoLiteCity file exists
   stat: path={{nginx_dir}}/geoip/GeoLiteCity.dat
@@ -35,4 +45,6 @@
 
 - name: Nginx | Modules | Unarchive GeoLiteCity files
   shell: gunzip -c {{nginx_dir}}/geoip/GeoLiteCity.dat.gz > {{nginx_dir}}/geoip/GeoLiteCity.dat
-  when: not geolitecity_file.stat.exists
+  when:
+    - nginx_geoip != 'off'
+    - not geolitecity_file.stat.exists
