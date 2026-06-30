@@ -11,9 +11,6 @@ ssl_password_file         {{ nginx_ssl_passphrase_path }};
 {% endif %}
 
 # SSL opts
-{% if site.server.ssl.add_ssl_directive is not defined or site.server.ssl.add_ssl_directive %}
-ssl on;
-{% endif %}
 ssl_protocols             {{ nginx_ssl_protocols }};
 ssl_ciphers               "{{ nginx_ssl_ciphers }}";
 ssl_dhparam               /etc/ssl/certs/dhparam.pem;

@@ -5,19 +5,36 @@ on:
   - push
 
 jobs:
-  build:
+  molecule:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         scenario:
-          - ubuntu
+          - default
+          - install-only
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          path: "${{ github.repository }}"
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install molecule "molecule-plugins[docker]" pytest-testinfra ansible docker yamllint flake8
+
+      - name: Lint
+        run: |
+          yamllint .
+          flake8
+
       - name: Run Molecule tests
-        uses: onaio/molecule-action@master
-        with:
-          molecule_args: --all
+        run: molecule test -s "${{ matrix.scenario }}"
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
+          MOLECULE_NO_LOG: "false"
