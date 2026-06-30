@@ -9,6 +9,16 @@
     group: root
     mode: 0644
 
+- name: Nginx | Make sure the uwsgi_params file is present
+  copy:
+    src: uwsgi_params
+    dest: "{{nginx_dir}}/uwsgi_params"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+
 - name: Nginx | Check for existence of Nginx configuration
   stat:
     path: "{{nginx_dir}}/nginx.conf"
