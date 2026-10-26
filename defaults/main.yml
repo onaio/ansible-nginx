@@ -3,7 +3,7 @@
 
 
 nginx_install_method: "{{ 'package' if ansible_distribution_version is version('22.04', '>=') else 'source' }}"
-nginx_source_version: "1.25.2"
+nginx_source_version: "1.30.6"
 nginx: "nginx"
 ubuntu_release: "{{ ansible_distribution_release }}"
 nginx_install_only: false
